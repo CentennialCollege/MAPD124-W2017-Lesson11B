@@ -23,6 +23,7 @@ class ViewController: UIViewController {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         if let touch = touches.first {
             gestureStartPoint = touch.location(in: self.view)
+            print ("Initial X: \(gestureStartPoint.x),  Initial Y: \(gestureStartPoint.y)")
         }
     }
     
@@ -35,6 +36,7 @@ class ViewController: UIViewController {
             
             if deltaX >= ViewController.minimumGestureLength && deltaY <= ViewController.maximumVariance {
                 messageLabel.text = "horizontal swipe detected"
+                print ("Swipe X: \(currentPosition.x),  Swipe Y: \(currentPosition.y)")
                 DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() +
                     Double(Int64(2 * NSEC_PER_SEC)) / Double(NSEC_PER_SEC), execute: {
                         self.messageLabel.text = ""
@@ -42,6 +44,7 @@ class ViewController: UIViewController {
             }
             else if deltaY >= ViewController.minimumGestureLength && deltaX <= ViewController.maximumVariance {
                 messageLabel.text = "vertical swipe detected"
+                print ("Swipe X: \(currentPosition.x),  Swipe Y: \(currentPosition.y)")
                 DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() +
                     Double(Int64(2 * NSEC_PER_SEC)) / Double(NSEC_PER_SEC), execute: {
                         self.messageLabel.text = ""
