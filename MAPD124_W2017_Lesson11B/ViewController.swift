@@ -18,8 +18,41 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+
+        let vertical = UISwipeGestureRecognizer(target: self, action: #selector(reportVerticalSwipe(_:)))
+        vertical.direction = [.up, .down]
+        view.addGestureRecognizer(vertical)
+        
+        let horizontal = UISwipeGestureRecognizer(target: self, action: #selector(reportHorizontalSwipe(_:)))
+        horizontal.direction = [.left, .right]
+        view.addGestureRecognizer(horizontal)
     }
     
+    
+    func reportHorizontalSwipe(_ recognizer:UIGestureRecognizer) {
+        messageLabel.text = "Horizontal Swipe Detected"
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() +
+            Double(Int64(2 * NSEC_PER_SEC)) / Double(NSEC_PER_SEC), execute: {
+                self.messageLabel.text = ""
+        })
+    }
+    
+    
+    func reportVerticalSwipe(_ recognizer:UIGestureRecognizer){
+        messageLabel.text = "Vertical Swipe Detected"
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() +
+            Double(Int64(2 * NSEC_PER_SEC)) / Double(NSEC_PER_SEC), execute: {
+                self.messageLabel.text = ""
+        })
+    }
+    
+    
+    
+    
+    
+    
+    /*
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         if let touch = touches.first {
             gestureStartPoint = touch.location(in: self.view)
@@ -53,6 +86,7 @@ class ViewController: UIViewController {
             }
         }
     }
+ */
 
 
 
